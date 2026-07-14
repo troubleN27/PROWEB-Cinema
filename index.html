@@ -1,0 +1,3513 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PROWEB Cinema - современный кинотеатр нового поколения в Ташкенте. Лазерное качество 4K, звук Dolby Atmos и лучшие кинопремьеры.">
+  <title>PROWEB Cinema — Инновационный Кинотеатр в Ташкенте</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      /* Colors */
+      --bg-dark: #07080d;
+      --bg-card: #0e1118;
+      --bg-hover: #161a24;
+      --accent-primary: #00f2fe;
+      --accent-secondary: #4facfe;
+      --accent-pink: #ff007f;
+      --accent-green: #00e676;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-active: rgba(0, 242, 254, 0.4);
+      
+      /* Typography */
+      --font-title: 'Syne', 'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      
+      /* Shadows & Glows */
+      --shadow-neon: 0 0 20px rgba(0, 242, 254, 0.15);
+      --shadow-pink: 0 0 20px rgba(255, 0, 127, 0.15);
+      --gradient-accent: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+      --gradient-pink: linear-gradient(135deg, var(--accent-pink) 0%, #ff5252 100%);
+      --gradient-card: linear-gradient(180deg, rgba(14, 17, 24, 0.8) 0%, rgba(7, 8, 13, 0.95) 100%);
+      
+      /* Transitions */
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-card);
+      border-radius: 4px;
+      border: 2px solid var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Typography Helpers */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-title);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    button, input, textarea {
+      font-family: inherit;
+      background: none;
+      border: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Common Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
+      opacity: 0;
+      z-index: -1;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      box-shadow: var(--shadow-neon);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 242, 254, 0.08);
+      box-shadow: var(--shadow-neon);
+      transform: translateY(-2px);
+    }
+
+    .btn-pink {
+      background: var(--gradient-pink);
+      color: #fff;
+    }
+
+    .btn-pink:hover {
+      box-shadow: var(--shadow-pink);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION & HEADER
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(7, 8, 13, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-smooth);
+    }
+
+    .header-scrolled {
+      padding: 10px 0;
+      background: rgba(7, 8, 13, 0.95);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      transition: var(--transition-smooth);
+    }
+
+    .header-scrolled .nav-container {
+      height: 65px;
+    }
+
+    .logo {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+
+    .logo span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-icon {
+      color: var(--accent-primary);
+      filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.6));
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-accent);
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #fff;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Actions and Language Switcher */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 17px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      color: var(--text-muted);
+    }
+
+    .lang-btn.active {
+      background: var(--gradient-accent);
+      color: #000;
+    }
+
+    /* Hamburger Menu */
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .burger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    /* Hamburger Active Animation */
+    .burger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+      background-color: var(--accent-primary);
+    }
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .burger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+      background-color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       4. HERO SECTION
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(180deg, rgba(7, 8, 13, 0.4) 0%, var(--bg-dark) 95%), url('images/hero_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      transform: scale(1.02);
+      animation: heroBgZoom 20s infinite alternate ease-in-out;
+    }
+
+    @keyframes heroBgZoom {
+      0% { transform: scale(1.02); }
+      100% { transform: scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 650px;
+      z-index: 2;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--accent-primary);
+    }
+
+    .hero-tagline span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-pink);
+      box-shadow: 0 0 10px var(--accent-pink);
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-title span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      max-width: 550px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* ==========================================================================
+       5. MOVIES SECTION ("СЕЙЧАС В КИНО")
+       ========================================================================== */
+    .movies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .movie-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-active);
+      box-shadow: var(--shadow-neon);
+    }
+
+    .movie-poster-container {
+      position: relative;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+    }
+
+    .movie-poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition-slow);
+    }
+
+    .movie-card:hover .movie-poster {
+      transform: scale(1.08);
+    }
+
+    .movie-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(7, 8, 13, 0.2) 0%, rgba(7, 8, 13, 0.9) 100%);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      z-index: 2;
+    }
+
+    .movie-card:hover .movie-overlay {
+      opacity: 1;
+    }
+
+    .movie-overlay-btn {
+      transform: translateY(20px);
+      transition: var(--transition-smooth);
+    }
+
+    .movie-card:hover .movie-overlay-btn {
+      transform: translateY(0);
+    }
+
+    /* Badges */
+    .movie-badges {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 3;
+    }
+
+    .badge-age {
+      background: var(--accent-pink);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: flex-start;
+      box-shadow: 0 4px 10px rgba(255, 0, 127, 0.4);
+    }
+
+    .badge-duration {
+      background: rgba(7, 8, 13, 0.85);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+
+    .movie-info {
+      padding: 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .movie-genre {
+      color: var(--accent-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .movie-title {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .movie-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex-grow: 1;
+    }
+
+    .movie-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .movie-price {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .movie-price-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .movie-price-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      font-family: var(--font-title);
+    }
+
+    /* ==========================================================================
+       6. SCHEDULE SECTION ("РАСПИСАНИЕ СЕАНСОВ")
+       ========================================================================== */
+    .schedule-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 50px;
+    }
+
+    .tab-btn {
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition-smooth);
+      color: var(--text-muted);
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .tab-btn.active {
+      background: var(--gradient-accent);
+      color: #000;
+      font-weight: 700;
+      border-color: transparent;
+      box-shadow: var(--shadow-neon);
+    }
+
+    .schedule-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .schedule-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      align-items: center;
+      padding: 30px;
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-smooth);
+    }
+
+    .schedule-row:last-child {
+      border-bottom: none;
+    }
+
+    .schedule-row:hover {
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .schedule-movie-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .schedule-movie-thumb {
+      width: 60px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .schedule-movie-details h4 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+    }
+
+    .schedule-movie-details p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .schedule-times {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: flex-start;
+    }
+
+    .time-slot {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .time-slot:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      box-shadow: var(--shadow-neon);
+      transform: translateY(-2px);
+    }
+
+    .time-slot-format {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .time-slot:hover .time-slot-format {
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       7. ABOUT SECTION ("О КИНОТЕАТРЕ")
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      transition: var(--transition-smooth);
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-active);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-neon);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0, 242, 254, 0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      margin-bottom: 20px;
+      transition: var(--transition-smooth);
+    }
+
+    .feature-card:hover .feature-icon {
+      background: var(--gradient-accent);
+      color: #000;
+      box-shadow: var(--shadow-neon);
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       8. PROMOTIONS SECTION ("АКЦИИ")
+       ========================================================================== */
+    .promos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .promo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: var(--transition-smooth);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 0, 127, 0.3);
+      box-shadow: var(--shadow-pink);
+    }
+
+    .promo-accent-line {
+      height: 4px;
+      background: var(--gradient-pink);
+      width: 100%;
+    }
+
+    .promo-card:nth-child(2n) .promo-accent-line {
+      background: var(--gradient-accent);
+    }
+
+    .promo-card:nth-child(2n):hover {
+      border-color: var(--border-active);
+      box-shadow: var(--shadow-neon);
+    }
+
+    .promo-content {
+      padding: 40px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(255, 0, 127, 0.08);
+      color: var(--accent-pink);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+
+    .promo-card:nth-child(2n) .promo-badge {
+      background: rgba(0, 242, 254, 0.08);
+      color: var(--accent-primary);
+    }
+
+    .promo-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .promo-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* ==========================================================================
+       9. BOOKING FORM & ACTIVE TICKET SUMMARY
+       ========================================================================== */
+    .booking-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .booking-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .form-control {
+      width: 100%;
+      background: rgba(7, 8, 13, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 1rem;
+      color: #fff;
+      transition: var(--transition-smooth);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
+      outline: none;
+    }
+
+    .form-group.is-invalid .form-control {
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.1);
+    }
+
+    .form-feedback {
+      font-size: 0.8rem;
+      color: var(--accent-pink);
+      margin-top: 6px;
+      display: none;
+    }
+
+    .form-group.is-invalid .form-feedback {
+      display: block;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Booking Summary Column */
+    .summary-card {
+      background: linear-gradient(135deg, rgba(14, 17, 24, 0.9) 0%, rgba(7, 8, 13, 0.95) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      position: sticky;
+      top: 110px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .summary-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+    }
+
+    .summary-empty-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: rgba(255, 255, 255, 0.15);
+      animation: float 3s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .summary-content {
+      display: none;
+    }
+
+    .summary-movie-info {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .summary-poster {
+      width: 80px;
+      aspect-ratio: 2/3;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .summary-movie-title {
+      font-size: 1.3rem;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .summary-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .summary-detail-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .summary-detail-label {
+      color: var(--text-muted);
+    }
+
+    .summary-detail-value {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .summary-detail-value.seats-list {
+      color: var(--accent-primary);
+    }
+
+    .summary-total {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .summary-total-label {
+      font-weight: 600;
+    }
+
+    .summary-total-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      font-family: var(--font-title);
+      text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+
+    .summary-change-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px 0;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .summary-change-btn:hover {
+      border-color: var(--accent-primary);
+      color: #fff;
+    }
+
+    /* Shake animation for invalid validation */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+
+    /* ==========================================================================
+       10. CONTACTS & INTERACTIVE VECTOR MAP
+       ========================================================================== */
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .contact-info-list {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      flex-shrink: 0;
+    }
+
+    .contact-text h4 {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .contact-text p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .social-btn {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .social-btn:hover {
+      color: #000;
+      background: var(--gradient-accent);
+      border-color: transparent;
+      box-shadow: var(--shadow-neon);
+      transform: translateY(-3px);
+    }
+
+    /* Interactive Map Mock */
+    .map-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .mock-map-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .map-landmark {
+      cursor: pointer;
+    }
+
+    .map-landmark text {
+      opacity: 0.5;
+      transition: var(--transition-smooth);
+    }
+
+    .map-landmark:hover text {
+      opacity: 1;
+      fill: var(--accent-primary);
+    }
+
+    .pulse-circle {
+      transform-origin: center;
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        transform: scale(0.6);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.4);
+        opacity: 0.15;
+      }
+      100% {
+        transform: scale(0.6);
+        opacity: 0.8;
+      }
+    }
+
+    /* Map Overlay Banner */
+    .map-info-popup {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(14, 17, 24, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      max-width: 250px;
+      pointer-events: none;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .map-info-popup.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .map-popup-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .map-popup-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       11. MODAL WINDOWS (SEATS & TICKET SUCCESS)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 8, 13, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 650px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+      transform: scale(0.9) translateY(20px);
+      transition: var(--transition-smooth);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      padding: 24px 30px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+
+    .modal-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    /* Interactive Seat Grid */
+    .seat-selection-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Screen element */
+    .cinema-screen {
+      width: 80%;
+      height: 8px;
+      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0) 100%);
+      border-radius: 50% 50% 0 0;
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+      margin: 10px 0 40px 0;
+      position: relative;
+      text-align: center;
+    }
+
+    .cinema-screen-label {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 700;
+    }
+
+    /* Seat layout grid */
+    .seat-grid {
+      display: grid;
+      grid-gap: 10px;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .seat-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .row-label {
+      width: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .seat {
+      width: 32px;
+      height: 30px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px 6px 3px 3px;
+      transition: var(--transition-smooth);
+      position: relative;
+      cursor: pointer;
+    }
+
+    /* Seat types */
+    .seat.vip {
+      width: 50px;
+      background-color: rgba(255, 0, 127, 0.08);
+      border-color: rgba(255, 0, 127, 0.2);
+    }
+
+    .seat.occupied {
+      background-color: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.02);
+      color: rgba(255,255,255,0.05);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .seat.occupied::after {
+      content: '×';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .seat:hover:not(.occupied) {
+      transform: scale(1.15);
+      background-color: rgba(0, 242, 254, 0.2);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+    }
+
+    .seat.vip:hover:not(.occupied) {
+      background-color: rgba(255, 0, 127, 0.2);
+      border-color: var(--accent-pink);
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.4);
+    }
+
+    .seat.selected {
+      background: var(--gradient-accent) !important;
+      border-color: transparent !important;
+      color: #000 !important;
+      box-shadow: var(--shadow-neon) !important;
+    }
+
+    .seat.selected.vip {
+      background: var(--gradient-pink) !important;
+      color: #fff !important;
+      box-shadow: var(--shadow-pink) !important;
+    }
+
+    /* Legend */
+    .seat-legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 30px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 0;
+      width: 100%;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .legend-dot.selected {
+      background: var(--gradient-accent);
+    }
+
+    .legend-dot.occupied {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.02);
+      position: relative;
+    }
+
+    .legend-dot.occupied::after {
+      content: '×';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .legend-dot.vip {
+      background: rgba(255, 0, 127, 0.08);
+      border-color: rgba(255, 0, 127, 0.2);
+    }
+
+    /* Modal Footer */
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .modal-summary {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-seats-count {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .modal-seats-val {
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .modal-total-price {
+      font-size: 1.3rem;
+      font-weight: 800;
+      font-family: var(--font-title);
+      color: #fff;
+    }
+
+    /* Ticket Confirmation Modal (Digital Ticket) */
+    .ticket-modal-box {
+      max-width: 580px;
+      background: #090c13;
+    }
+
+    .ticket-container {
+      background: linear-gradient(135deg, #111625 0%, #07090e 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    }
+
+    .ticket-top {
+      padding: 30px;
+      position: relative;
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    /* Ticket side cutouts */
+    .ticket-top::after, .ticket-top::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      width: 20px;
+      height: 20px;
+      background: #090c13;
+      border-radius: 50%;
+      z-index: 5;
+    }
+    .ticket-top::before { left: -10px; }
+    .ticket-top::after { right: -10px; }
+
+    .ticket-logo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .ticket-brand {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent-primary);
+      text-shadow: 0 0 10px rgba(0,242,254,0.3);
+    }
+
+    .ticket-id {
+      font-family: monospace;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.03);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .ticket-movie-title {
+      font-size: 1.8rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .ticket-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .ticket-detail-item h5 {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .ticket-detail-item p {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .ticket-detail-item p.seats-highlight {
+      color: var(--accent-primary);
+    }
+
+    .ticket-bottom {
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Mock barcode */
+    .barcode-svg {
+      width: 100%;
+      max-width: 320px;
+      height: 60px;
+    }
+
+    .ticket-barcode-num {
+      font-family: monospace;
+      letter-spacing: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: -10px;
+    }
+
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(0, 230, 118, 0.08);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { box-shadow: 0 0 10px rgba(0, 230, 118, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(0, 230, 118, 0.3); }
+    }
+
+    /* ==========================================================================
+       12. FOOTER
+       ========================================================================== */
+    .footer {
+      background: #040508;
+      padding: 60px 0 30px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .footer-logo span {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-link {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-link:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       13. RESPONSIVE STYLES (MEDIA QUERIES)
+       ========================================================================== */
+    
+    /* Desktop Large */
+    @media (max-width: 1200px) {
+      .container {
+        padding: 0 32px;
+      }
+    }
+
+    /* Tablets / Medium Screens */
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 3.2rem;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .booking-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .summary-card {
+        position: static;
+        top: 0;
+      }
+      .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .map-wrapper {
+        aspect-ratio: 16/9;
+      }
+      .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .schedule-times {
+        margin-top: 10px;
+      }
+    }
+
+    /* Mobile Devices & Small Tablets */
+    @media (max-width: 768px) {
+      .header {
+        background: rgba(7, 8, 13, 0.95);
+      }
+      
+      /* Hamburger Show */
+      .burger {
+        display: flex;
+      }
+
+      /* Sliding mobile drawer menu */
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #07080d;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        gap: 40px;
+        transition: var(--transition-smooth);
+        z-index: 999;
+        overflow-y: auto;
+        border-top: 1px solid var(--border);
+      }
+
+      .header-scrolled .nav-menu {
+        top: 65px;
+        height: calc(100vh - 65px);
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-link {
+        font-size: 1.25rem;
+      }
+
+      /* Hero mobile adjustments */
+      .hero {
+        padding-top: 100px;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .hero-desc {
+        font-size: 1.05rem;
+      }
+      .hero-btns {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn {
+        width: 100%;
+      }
+
+      /* Sections padding */
+      .section {
+        padding: 60px 0;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+
+      /* Feature / Promo Grids */
+      .about-features {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      /* Modal sizing */
+      .modal-box {
+        max-width: 95%;
+        border-radius: 16px;
+      }
+      .modal-body {
+        padding: 20px;
+      }
+      .seat-grid {
+        grid-gap: 6px;
+      }
+      .seat {
+        width: 25px;
+        height: 25px;
+      }
+      .seat.vip {
+        width: 38px;
+      }
+      .modal-footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      .modal-summary {
+        align-items: center;
+      }
+
+      /* Ticket Mobile */
+      .ticket-top {
+        padding: 20px;
+      }
+      .ticket-bottom {
+        padding: 20px;
+      }
+      .ticket-movie-title {
+        font-size: 1.4rem;
+      }
+      .ticket-details-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      /* Footer Mobile */
+      .footer-top {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+      .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */ -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="nav-container">
+        <!-- Logo -->
+        <a href="#" class="logo">
+          <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+          </svg>
+          PROWEB <span>Cinema</span>
+        </a>
+
+        <!-- Hamburger (Mobile) -->
+        <div class="burger" id="burger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu" id="nav-menu">
+          <a href="#" class="nav-link active" data-i18n="navHome">Главная</a>
+          <a href="#movies" class="nav-link" data-i18n="navMovies">Сейчас в кино</a>
+          <a href="#schedule" class="nav-link" data-i18n="navSchedule">Расписание</a>
+          <a href="#about" class="nav-link" data-i18n="navAbout">О нас</a>
+          <a href="#promos" class="nav-link" data-i18n="navPromos">Акции</a>
+          <a href="#contacts" class="nav-link" data-i18n="navContacts">Контакты</a>
+        </nav>
+
+        <!-- Actions / Language Selector -->
+        <div class="header-actions">
+          <div class="lang-switcher" id="lang-switcher" aria-label="Switch Language">
+            <span class="lang-btn active" data-lang="ru">RU</span>
+            <span class="lang-btn" data-lang="uz">UZ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== */ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title"><span data-i18n="heroTitleStart">PROWEB</span> <span data-i18n="heroTitleEnd">Cinema</span></h1>
+        <p class="hero-desc" data-i18n="heroDesc">
+          Инновационный звук Dolby Atmos, кристально чистое лазерное изображение 4K и непревзойденный комфорт в самом центре столицы.
+        </p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="openHeroBooking()" data-i18n="heroBuyBtn">Купить билет</button>
+          <a href="#movies" class="btn btn-secondary" data-i18n="heroMoreBtn">Смотреть афишу</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MOVIES SECTION
+       ========================================================================== */ -->
+  <section class="section" id="movies">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secMoviesTitle">Сейчас в кино</h2>
+        <p class="section-subtitle" data-i18n="secMoviesSub">Выберите фильм и погрузитесь в мир кинематографа</p>
+      </div>
+
+      <!-- Movie cards grid dynamically filled via JavaScript -->
+      <div class="movies-grid" id="movies-grid"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCHEDULE SECTION
+       ========================================================================== */ -->
+  <section class="section" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secScheduleTitle">Расписание сеансов</h2>
+        <p class="section-subtitle" data-i18n="secScheduleSub">Удобное время для вашего отдыха</p>
+      </div>
+
+      <!-- Date selector tabs -->
+      <div class="schedule-tabs" id="schedule-tabs">
+        <button class="tab-btn active" data-date="today" id="tab-today">Сегодня</button>
+        <button class="tab-btn" data-date="tomorrow" id="tab-tomorrow">Завтра</button>
+        <button class="tab-btn" data-date="dayAfter" id="tab-dayAfter">Послезавтра</button>
+      </div>
+
+      <!-- Showtimes List dynamically filled via JavaScript -->
+      <div class="schedule-container" id="schedule-container"></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ABOUT SECTION
+       ========================================================================== */ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h3 data-i18n="secAboutTitle">Инновации в каждом кадре</h3>
+          <p data-i18n="secAboutText1">
+            PROWEB Cinema — это современный кинотеатр нового поколения в Ташкенте. Мы предлагаем нашим зрителям незабываемый опыт просмотра фильмов благодаря передовым технологиям проекции и звука.
+          </p>
+          <p data-i18n="secAboutText2">
+            Наши залы оснащены лазерными проекторами 4K Barco, звуковой системой Dolby Atmos и премиальными эргономичными креслами-реклайнерами для максимального комфорта во время киносеанса.
+          </p>
+        </div>
+
+        <div class="about-features">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+                <line x1="7" y1="2" x2="7" y2="22"/>
+                <line x1="17" y1="2" x2="17" y2="22"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <line x1="2" y1="7" x2="7" y2="7"/>
+                <line x1="2" y1="17" x2="7" y2="17"/>
+                <line x1="17" y1="17" x2="22" y2="17"/>
+                <line x1="17" y1="7" x2="22" y2="7"/>
+              </svg>
+            </div>
+            <h4 class="feature-title" data-i18n="aboutFeat1Title">Лазерный 4K</h4>
+            <p class="feature-desc" data-i18n="aboutFeat1Desc">Невероятно четкое, сочное и яркое изображение в любом разрешении</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </div>
+            <h4 class="feature-title" data-i18n="aboutFeat2Title">Dolby Atmos</h4>
+            <p class="feature-desc" data-i18n="aboutFeat2Desc">Трехмерный объемный звук, полностью погружающий вас в эпицентр событий</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h4 class="feature-title" data-i18n="aboutFeat3Title">VIP Залы</h4>
+            <p class="feature-desc" data-i18n="aboutFeat3Desc">Индивидуальный премиальный сервис, беспроводной вызов официанта и реклайнеры</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <h4 class="feature-title" data-i18n="aboutFeat4Title">Food Court</h4>
+            <p class="feature-desc" data-i18n="aboutFeat4Desc">Огромный выбор карамельного попкорна, изысканных закусок и свежих напитков</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROMOTIONS SECTION
+       ========================================================================== */ -->
+  <section class="section" id="promos">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secPromosTitle">Акции и спецпредложения</h2>
+        <p class="section-subtitle" data-i18n="secPromosSub">Специальные скидки и бонусы для наших гостей</p>
+      </div>
+
+      <div class="promos-grid">
+        <!-- Promo 1 -->
+        <div class="promo-card">
+          <div class="promo-accent-line"></div>
+          <div class="promo-content">
+            <span class="promo-badge" data-i18n="promoDiscount">Скидка 30%</span>
+            <h3 class="promo-title" data-i18n="promo1Title">Студенческий Вторник</h3>
+            <p class="promo-desc" data-i18n="promo1Desc">Каждый вторник студенты получают скидку 30% на все сеансы кинотеатра при предъявлении студенческого билета на кассе.</p>
+          </div>
+        </div>
+
+        <!-- Promo 2 -->
+        <div class="promo-card">
+          <div class="promo-accent-line"></div>
+          <div class="promo-content">
+            <span class="promo-badge" data-i18n="promoGift">Подарок</span>
+            <h3 class="promo-title" data-i18n="promo2Title">Семейный Комбо</h3>
+            <p class="promo-desc" data-i18n="promo2Desc">При покупке 4 билетов на любой сеанс в семейный сектор или VIP-залы — большой сырный попкорн и 2 прохладительных напитка в подарок!</p>
+          </div>
+        </div>
+
+        <!-- Promo 3 -->
+        <div class="promo-card">
+          <div class="promo-accent-line"></div>
+          <div class="promo-content">
+            <span class="promo-badge" data-i18n="promoSpec">2 по цене 1</span>
+            <h3 class="promo-title" data-i18n="promo3Title">Ночной Киномарафон</h3>
+            <p class="promo-desc" data-i18n="promo3Desc">Каждую пятницу и субботу после 23:00 смотрите два фильма подряд по стоимости одного билета! Уточняйте фильмы на кассах.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BOOKING FORM & SUMMARY SECTION
+       ========================================================================== */ -->
+  <section class="section" id="booking">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secFormTitle">Быстрое бронирование</h2>
+        <p class="section-subtitle" data-i18n="secFormSub">Заполните форму, и мы свяжемся с вами для подтверждения брони</p>
+      </div>
+
+      <div class="booking-layout">
+        <!-- Form -->
+        <div class="booking-card" id="booking-form-wrapper">
+          <form id="booking-form" novalidate>
+            <!-- Name Input -->
+            <div class="form-group" id="group-name">
+              <label for="form-name" class="form-label" data-i18n="formName">Ваше имя</label>
+              <input type="text" id="form-name" class="form-control" data-i18n-placeholder="formNamePl" placeholder="Введите ваше имя" required>
+              <div class="form-feedback" data-i18n="formValidName">Пожалуйста, введите имя (минимум 2 символа)</div>
+            </div>
+
+            <!-- Phone Input -->
+            <div class="form-group" id="group-phone">
+              <label for="form-phone" class="form-label" data-i18n="formPhone">Номер телефона</label>
+              <input type="tel" id="form-phone" class="form-control" placeholder="+998 (__) ___-__-__" required>
+              <div class="form-feedback" data-i18n="formValidPhone">Пожалуйста, введите корректный номер телефона</div>
+            </div>
+
+            <!-- Comment Input -->
+            <div class="form-group" id="group-comment">
+              <label for="form-comment" class="form-label" data-i18n="formComment">Комментарий к бронированию</label>
+              <textarea id="form-comment" class="form-control" data-i18n-placeholder="formCommentPl" placeholder="Например: хочу VIP-ложу или определенный ряд"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;" data-i18n="formSubmit">Отправить заявку</button>
+          </form>
+        </div>
+
+        <!-- Ticket Summary -->
+        <div class="summary-card" id="summary-card">
+          <!-- Empty State -->
+          <div class="summary-empty" id="summary-empty">
+            <div class="summary-empty-icon">🎟️</div>
+            <p data-i18n="summaryEmptyText">Выберите сеанс и места на схеме, чтобы сгенерировать электронный билет.</p>
+          </div>
+
+          <!-- Selected Data State -->
+          <div class="summary-content" id="summary-content">
+            <div class="summary-movie-info">
+              <img src="" alt="Poster" class="summary-poster" id="summary-poster">
+              <div>
+                <h4 class="summary-movie-title" id="summary-title">Название фильма</h4>
+                <p id="summary-genre" style="color: var(--accent-primary); font-size: 0.8rem; font-weight:600; text-transform: uppercase;">Жанр</p>
+              </div>
+            </div>
+            
+            <div class="summary-detail-row">
+              <span class="summary-detail-label" data-i18n="summaryDateLabel">Дата и время</span>
+              <span class="summary-detail-value" id="summary-datetime">12 июля, 18:20</span>
+            </div>
+
+            <div class="summary-detail-row">
+              <span class="summary-detail-label" data-i18n="summarySeatsLabel">Выбранные места</span>
+              <span class="summary-detail-value seats-list" id="summary-seats">Ряд 2: №3, №4</span>
+            </div>
+
+            <div class="summary-total">
+              <span class="summary-total-label" data-i18n="summaryTotalLabel">Итого к оплате</span>
+              <span class="summary-total-val" id="summary-total-price">100 000 UZS</span>
+            </div>
+
+            <button class="summary-change-btn" onclick="reopenSeatPicker()" data-i18n="summaryChangeBtn">Изменить выбор мест</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACTS & INTERACTIVE MAP SECTION
+       ========================================================================== */ -->
+  <section class="section" id="contacts">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title" data-i18n="secContactsTitle">Контакты</h2>
+        <p class="section-subtitle" data-i18n="secContactsSub">Мы всегда рады видеть вас в нашем кинотеатре</p>
+      </div>
+
+      <div class="contacts-grid">
+        <!-- Text Contact Info -->
+        <div class="contacts-info">
+          <h3 data-i18n="contactInfoTitle" style="font-size: 1.8rem; margin-bottom: 25px;">Как нас найти</h3>
+          <div class="contact-info-list">
+            
+            <!-- Address -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <h4 data-i18n="contactAddressLabel">Адрес</h4>
+                <p data-i18n="contactAddress">г. Ташкент, ул. Шота Руставели, 53Б</p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <h4 data-i18n="contactPhoneLabel">Телефон справочной</h4>
+                <p data-i18n="contactPhone">+998 (71) 123-45-67</p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <h4 data-i18n="contactEmailLabel">Email</h4>
+                <p data-i18n="contactEmail">info@prowebcinema.uz</p>
+              </div>
+            </div>
+
+            <!-- Hours -->
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+              </div>
+              <div class="contact-text">
+                <h4 data-i18n="contactHoursLabel">Режим работы</h4>
+                <p data-i18n="contactHours">Ежедневно с 10:00 до 02:00</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Socials -->
+          <div class="social-links">
+            <a href="https://t.me/" target="_blank" class="social-btn" aria-label="Telegram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.47-.52-.17L7.69 13.38 3.6 12.1c-.89-.28-.9-.89.19-1.31l15.96-6.15c.74-.27 1.38.17 1.14 1.22l-2.72 12.81c-.2 1.01-.8 1.26-1.65.78l-4.13-3.05-2 1.93c-.22.22-.4.4-.82.4z"/>
+              </svg>
+            </a>
+            <a href="https://instagram.com/" target="_blank" class="social-btn" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/" target="_blank" class="social-btn" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+              </svg>
+            </a>
+            <a href="https://youtube.com/" target="_blank" class="social-btn" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Custom Map -->
+        <div class="map-wrapper" id="map-container">
+          <svg viewBox="0 0 800 500" width="100%" height="100%" class="mock-map-svg">
+            <defs>
+              <filter id="glow-teal" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+              <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="8" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            
+            <!-- Map Grid -->
+            <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#map-grid)" />
+            
+            <!-- Roads & Highways -->
+            <path d="M -50 120 Q 300 150 400 250 T 850 350" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" />
+            <path d="M -50 120 Q 300 150 400 250 T 850 350" fill="none" stroke="rgba(0, 242, 254, 0.12)" stroke-width="2" />
+            
+            <path d="M 100 520 Q 350 300 450 120 T 750 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="10" stroke-dasharray="12 6" />
+            <path d="M 100 520 Q 350 300 450 120 T 750 20" fill="none" stroke="rgba(0, 242, 254, 0.08)" stroke-width="2" />
+            
+            <path d="M 180 -20 L 250 520" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4" />
+            <path d="M 650 -20 L 550 520" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="4" />
+
+            <!-- Metro Line (glowing cyan line) -->
+            <path d="M -50 350 C 200 320, 390 280, 850 150" fill="none" stroke="#4facfe" stroke-width="4" filter="url(#glow-teal)" />
+            
+            <!-- Metro Stations -->
+            <g class="map-landmark" onclick="showMapPopup('metro-station-1')" transform="translate(180, 323)">
+              <circle cx="0" cy="0" r="7" fill="#07080d" stroke="#4facfe" stroke-width="3" />
+              <text x="12" y="4" fill="#94a3b8" font-size="9" font-family="Inter" font-weight="600" letter-spacing="1">METRO KOSMONAVTLAR</text>
+            </g>
+            <g class="map-landmark" onclick="showMapPopup('metro-station-2')" transform="translate(390, 280)">
+              <circle cx="0" cy="0" r="7" fill="#07080d" stroke="#4facfe" stroke-width="3" />
+              <text x="12" y="4" fill="#94a3b8" font-size="9" font-family="Inter" font-weight="600" letter-spacing="1">METRO OYBEK</text>
+            </g>
+
+            <!-- Landmarks -->
+            <!-- TV Tower -->
+            <g class="map-landmark" onclick="showMapPopup('tv-tower')" transform="translate(420, 90)">
+              <circle cx="0" cy="0" r="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+              <circle cx="0" cy="0" r="3" fill="#fff" />
+              <text x="12" y="4" fill="#94a3b8" font-size="10" font-family="Inter" font-weight="600" letter-spacing="1">TASHKENT TV TOWER</text>
+            </g>
+            
+            <!-- Amir Temur Square -->
+            <g class="map-landmark" onclick="showMapPopup('square')" transform="translate(600, 230)">
+              <circle cx="0" cy="0" r="8" fill="rgba(255, 255, 255, 0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="1" />
+              <circle cx="0" cy="0" r="3" fill="#fff" />
+              <text x="-155" y="4" fill="#94a3b8" font-size="10" font-family="Inter" font-weight="600" letter-spacing="1">AMIR TEMUR SQUARE</text>
+            </g>
+
+            <!-- PROWEB Cinema Pin (glowing pulsing pink pin) -->
+            <g class="map-cinema-pin" onclick="showMapPopup('cinema')" transform="translate(320, 290)" style="cursor:pointer;">
+              <!-- Pulsing radius -->
+              <circle cx="0" cy="-20" r="16" fill="rgba(255, 0, 127, 0.2)" class="pulse-circle"></circle>
+              
+              <!-- Pin Shape -->
+              <path d="M 0 0 C -10 -15, -10 -30, 0 -30 C 10 -30, 10 -15, 0 0 Z" fill="#ff007f" filter="url(#glow-pink)" />
+              <circle cx="0" cy="-20" r="4" fill="#ffffff" />
+              
+              <!-- Tag label -->
+              <rect x="-60" y="-55" width="120" height="20" rx="4" fill="#12141c" stroke="#ff007f" stroke-width="1.5" />
+              <text x="0" y="-41" fill="#ffffff" font-size="9" font-family="Syne" font-weight="bold" text-anchor="middle" letter-spacing="0.5">PROWEB CINEMA</text>
+            </g>
+          </svg>
+
+          <!-- Interactive Map Popup Box -->
+          <div class="map-info-popup" id="map-info-popup">
+            <h5 class="map-popup-title" id="map-popup-title">PROWEB Cinema</h5>
+            <p class="map-popup-desc" id="map-popup-desc">ул. Шота Руставели, 53Б. Основной корпус кинотеатра.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== */ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="#" class="footer-logo">
+          PROWEB <span>Cinema</span>
+        </a>
+        <div class="footer-links">
+          <a href="#" class="footer-link" data-i18n="navHome">Главная</a>
+          <a href="#movies" class="footer-link" data-i18n="navMovies">Сейчас в кино</a>
+          <a href="#schedule" class="footer-link" data-i18n="navSchedule">Расписание</a>
+          <a href="#about" class="footer-link" data-i18n="navAbout">О нас</a>
+          <a href="#promos" class="footer-link" data-i18n="navPromos">Акции</a>
+          <a href="#contacts" class="footer-link" data-i18n="navContacts">Контакты</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 PROWEB Cinema. <span data-i18n="footerCopy">Все права защищены.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL WINDOW: SEAT SELECTION
+       ========================================================================== */ -->
+  <div class="modal-overlay" id="seat-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="seat-modal-title">Выбор мест</h3>
+        <button class="modal-close" onclick="closeModal('seat-modal')" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="seat-selection-container">
+          <!-- Movie / Session detail subtitle in Modal -->
+          <p id="seat-modal-subtitle" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; text-align: center; font-weight: 500;">
+            Фильм: <strong class="text-white" id="seat-modal-movie-name"></strong> &bull; Сеанс: <strong class="text-white" id="seat-modal-time"></strong>
+          </p>
+
+          <!-- Cinema screen glow -->
+          <div class="cinema-screen">
+            <span class="cinema-screen-label" data-i18n="modalSeatScreen">ЭКРАН</span>
+          </div>
+
+          <!-- Dynamic seat grid -->
+          <div class="seat-grid" id="seat-grid-render"></div>
+
+          <!-- Legend -->
+          <div class="seat-legend">
+            <div class="legend-item">
+              <div class="legend-dot"></div>
+              <span data-i18n="modalSeatLegendAvail">Свободно</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot selected"></div>
+              <span data-i18n="modalSeatLegendSelected">Выбрано</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot occupied"></div>
+              <span data-i18n="modalSeatLegendOccupied">Занято</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot vip"></div>
+              <span>VIP (+50%)</span>
+            </div>
+          </div>
+
+          <!-- Modal footer summary -->
+          <div class="modal-footer">
+            <div class="modal-summary">
+              <span class="modal-seats-count"><span data-i18n="modalSeatSelectedLabel">Выбранные места</span>: <span class="modal-seats-val" id="modal-selected-seats-list">—</span></span>
+              <span class="modal-total-price" id="modal-total-price-val">0 UZS</span>
+            </div>
+            <button class="btn btn-primary" id="confirm-seats-btn" onclick="confirmSeatSelection()" data-i18n="modalSeatBookBtn" disabled>Подтвердить выбор</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL WINDOW: BOOKING SUCCESS TICKET
+       ========================================================================== */ -->
+  <div class="modal-overlay" id="ticket-modal">
+    <div class="modal-box ticket-modal-box">
+      <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+        <button class="modal-close" onclick="closeModal('ticket-modal')" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" style="padding-top: 10px;">
+        <div style="text-align: center;">
+          <div class="success-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span data-i18n="bookingSuccessTitle">Бронь успешно оформлена!</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;" data-i18n="bookingSuccessText">Наш менеджер свяжется с вами в течение 10 минут для подтверждения бронирования.</p>
+        </div>
+
+        <!-- Ticket design -->
+        <div class="ticket-container">
+          <div class="ticket-top">
+            <div class="ticket-logo">
+              <span class="ticket-brand">PROWEB Cinema</span>
+              <span class="ticket-id" id="ticket-id-val">PW-4928-UZ</span>
+            </div>
+            
+            <h4 class="ticket-movie-title" id="ticket-movie-name">Эра Роботов</h4>
+            
+            <div class="ticket-details-grid">
+              <div class="ticket-detail-item">
+                <h5 data-i18n="bookingDate">Дата и время</h5>
+                <p id="ticket-datetime">12 июля, 16:50</p>
+              </div>
+              <div class="ticket-detail-item">
+                <h5 data-i18n="bookingSeats">Места</h5>
+                <p class="seats-highlight" id="ticket-seats">Ряд C: №4, №5</p>
+              </div>
+              <div class="ticket-detail-item">
+                <h5 data-i18n="formName">Имя</h5>
+                <p id="ticket-visitor-name">Константин</p>
+              </div>
+              <div class="ticket-detail-item">
+                <h5 data-i18n="bookingTotal">Итого к оплате</h5>
+                <p id="ticket-total-price" style="font-family: var(--font-title); font-weight:700;">110 000 UZS</p>
+              </div>
+            </div>
+          </div>
+          <div class="ticket-bottom">
+            <!-- SVG Barcode -->
+            <svg class="barcode-svg" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <!-- Render vertical bars of different widths -->
+              <rect x="2" width="1.5" height="30" fill="white" />
+              <rect x="5.5" width="3" height="30" fill="white" />
+              <rect x="10" width="1" height="30" fill="white" />
+              <rect x="12" width="2" height="30" fill="white" />
+              <rect x="16" width="1.5" height="30" fill="white" />
+              <rect x="19" width="4" height="30" fill="white" />
+              <rect x="24" width="1" height="30" fill="white" />
+              <rect x="26.5" width="2" height="30" fill="white" />
+              <rect x="30" width="3" height="30" fill="white" />
+              <rect x="34.5" width="1" height="30" fill="white" />
+              <rect x="37" width="1.5" height="30" fill="white" />
+              <rect x="40" width="3" height="30" fill="white" />
+              <rect x="44.5" width="2" height="30" fill="white" />
+              <rect x="48" width="1" height="30" fill="white" />
+              <rect x="50" width="4" height="30" fill="white" />
+              <rect x="56" width="1.5" height="30" fill="white" />
+              <rect x="59" width="2" height="30" fill="white" />
+              <rect x="62.5" width="3" height="30" fill="white" />
+              <rect x="67" width="1" height="30" fill="white" />
+              <rect x="69.5" width="2" height="30" fill="white" />
+              <rect x="73" width="4" height="30" fill="white" />
+              <rect x="78.5" width="1.5" height="30" fill="white" />
+              <rect x="81" width="3" height="30" fill="white" />
+              <rect x="85.5" width="1" height="30" fill="white" />
+              <rect x="88" width="2.5" height="30" fill="white" />
+              <rect x="91.5" width="1.5" height="30" fill="white" />
+              <rect x="94" width="4" height="30" fill="white" />
+            </svg>
+            <div class="ticket-barcode-num" id="ticket-barcode-val">128947192847</div>
+            <button class="btn btn-secondary" onclick="closeModal('ticket-modal')" data-i18n="bookingCloseBtn" style="margin-top: 10px; width:100%;">Закрыть</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== */ -->
+  <script>
+    /* ==========================================================================
+       1. DATA DEFINITION
+       ========================================================================== */
+    const movies = [
+      {
+        id: 1,
+        title: { ru: "Эра Роботов", uz: "Robotlar Erası" },
+        genre: { ru: "Научная фантастика, Экшн", uz: "Ilmiy fantastika, Jangari" },
+        duration: "128 мин",
+        age: "12+",
+        price: 55000,
+        poster: "images/poster_cyber_robot.jpg",
+        desc: {
+          ru: "В будущем, где люди и андроиды сосуществуют, искусственный интеллект обретает сознание, меняя судьбу человечества навсегда.",
+          uz: "Odamlar va androidlar birga yashaydigan kelajakda sun'iy intellekt ong kasb etib, insoniyat taqdirini butunlay o'zgartiradi."
+        },
+        showtimes: ["10:30", "13:40", "16:50", "20:00", "22:50"]
+      },
+      {
+        id: 2,
+        title: { ru: "Космический Путь", uz: "Koinot Yo'li" },
+        genre: { ru: "Приключения, Космос", uz: "Sarguzasht, Koinot" },
+        duration: "142 мин",
+        age: "6+",
+        price: 60000,
+        poster: "images/poster_cosmic_way.jpg",
+        desc: {
+          ru: "Экипаж исследовательского корабля отправляется сквозь пространственную червоточину в неизведанную галактику ради спасения Земли.",
+          uz: "Tadqiqot kemasi ekipaji Yerni qutqarish uchun noma'lum galaktikaga fazoviy qurt teshigi orqali yo'l oladi."
+        },
+        showtimes: ["11:00", "14:15", "17:30", "20:45", "23:45"]
+      },
+      {
+        id: 3,
+        title: { ru: "Тайна Времени", uz: "Vaqt Siri" },
+        genre: { ru: "Триллер, Детектив, Фантастика", uz: "Triller, Detektiv, Fantastika" },
+        duration: "115 мин",
+        age: "16+",
+        price: 50000,
+        poster: "images/poster_time_mystery.jpg",
+        desc: {
+          ru: "Физик-экспериментатор обнаруживает временную петлю в своей лаборатории и пытается предотвратить катастрофу, которая уже произошла.",
+          uz: "Eksperimental fizik o'z laboratoriyasida vaqt tsiklini aniqlaydi va sodir bo'lib o'tgan falokatning oldini olishga harakat qiladi."
+        },
+        showtimes: ["10:00", "12:30", "15:00", "18:20", "21:00", "23:30"]
+      },
+      {
+        id: 4,
+        title: { ru: "Любовь в Ташкенте", uz: "Toshkentdagi Muhabbat" },
+        genre: { ru: "Мелодрама, Комедия", uz: "Melodrama, Komediya" },
+        duration: "105 мин",
+        age: "12+",
+        price: 45000,
+        poster: "images/poster_tashkent_love.jpg",
+        desc: {
+          ru: "Вдохновляющая история любви двух молодых людей на фоне залитых солнцем улиц и современных небоскребов Ташкента.",
+          uz: "Toshkentning quyoshli ko'chalari va zamonaviy osmono'par binolari fonida ikki yoshning ilhomlantiruvchi muhabbat tarixi."
+        },
+        showtimes: ["12:00", "14:30", "17:00", "19:30", "21:50"]
+      }
+    ];
+
+    /* ==========================================================================
+       2. TRANSLATION DICTIONARY (I18N)
+       ========================================================================== */
+    const i18n = {
+      ru: {
+        navHome: "Главная",
+        navMovies: "Сейчас в кино",
+        navSchedule: "Расписание",
+        navAbout: "О нас",
+        navPromos: "Акции",
+        navContacts: "Контакты",
+        heroTitleStart: "PROWEB",
+        heroTitleEnd: "Cinema",
+        heroDesc: "Инновационный звук Dolby Atmos, кристально чистое лазерное изображение 4K и непревзойденный комфорт в самом центре столицы.",
+        heroBuyBtn: "Купить билет",
+        heroMoreBtn: "Смотреть афишу",
+        secMoviesTitle: "Сейчас в кино",
+        secMoviesSub: "Выберите фильм и погрузитесь в мир кинематографа",
+        secScheduleTitle: "Расписание сеансов",
+        secScheduleSub: "Удобное время для вашего отдыха",
+        secAboutTitle: "Инновации в каждом кадре",
+        secAboutText1: "PROWEB Cinema — это современный кинотеатр нового поколения в Ташкенте. Мы предлагаем нашим зрителям незабываемый опыт просмотра фильмов благодаря передовым технологиям проекции и звука.",
+        secAboutText2: "Наши залы оснащены лазерными проекторами 4K Barco, звуковой системой Dolby Atmos и премиальными эргономичными креслами-реклайнерами для максимального комфорта во время киносеанса.",
+        aboutFeat1Title: "Лазерный 4K",
+        aboutFeat1Desc: "Невероятно четкое, сочное и яркое изображение в любом разрешении",
+        aboutFeat2Title: "Dolby Atmos",
+        aboutFeat2Desc: "Трехмерный объемный звук, полностью погружающий вас в эпицентр событий",
+        aboutFeat3Title: "VIP Залы",
+        aboutFeat3Desc: "Индивидуальный премиальный сервис, беспроводной вызов официанта и реклайнеры",
+        aboutFeat4Title: "Food Court",
+        aboutFeat4Desc: "Огромный выбор карамельного попкорна, изысканных закусок и свежих напитков",
+        secPromosTitle: "Акции и спецпредложения",
+        secPromosSub: "Специальные скидки и бонусы для наших гостей",
+        promoDiscount: "Скидка 30%",
+        promoGift: "Подарок",
+        promoSpec: "2 по цене 1",
+        promo1Title: "Студенческий Вторник",
+        promo1Desc: "Каждый вторник студенты получают скидку 30% на все сеансы кинотеатра при предъявлении студенческого билета на кассе.",
+        promo2Title: "Семейный Комбо",
+        promo2Desc: "При покупке 4 билетов на любой сеанс в семейный сектор или VIP-залы — большой сырный попкорн и 2 прохладительных напитка в подарок!",
+        promo3Title: "Ночной Киномарафон",
+        promo3Desc: "Каждую пятницу и субботу после 23:00 смотрите два фильма подряд по стоимости одного билета! Уточняйте фильмы на кассах.",
+        secFormTitle: "Быстрое бронирование",
+        secFormSub: "Заполните форму, и мы свяжемся с вами для подтверждения брони",
+        formName: "Ваше имя",
+        formNamePl: "Введите ваше имя",
+        formPhone: "Номер телефона",
+        formComment: "Комментарий к бронированию",
+        formCommentPl: "Например: хочу VIP-ложу или определенный ряд",
+        formSubmit: "Отправить заявку",
+        formValidName: "Пожалуйста, введите имя (минимум 2 символа)",
+        formValidPhone: "Пожалуйста, введите корректный номер телефона",
+        summaryEmptyText: "Выберите сеанс и места на схеме, чтобы сгенерировать электронный билет.",
+        summaryDateLabel: "Дата и время",
+        summarySeatsLabel: "Выбранные места",
+        summaryTotalLabel: "Итого к оплате",
+        summaryChangeBtn: "Изменить выбор мест",
+        bookingSuccessTitle: "Бронь успешно оформлена!",
+        bookingSuccessText: "Наш менеджер свяжется с вами в течение 10 минут для подтверждения бронирования.",
+        bookingDate: "Дата и время",
+        bookingSeats: "Места",
+        bookingCloseBtn: "Закрыть",
+        secContactsTitle: "Контакты",
+        secContactsSub: "Мы всегда рады видеть вас в нашем кинотеатре",
+        contactInfoTitle: "Как нас найти",
+        contactAddressLabel: "Адрес",
+        contactAddress: "г. Ташкент, ул. Шота Руставели, 53Б",
+        contactPhoneLabel: "Телефон справочной",
+        contactPhone: "+998 (71) 123-45-67",
+        contactEmailLabel: "Email",
+        contactEmail: "info@prowebcinema.uz",
+        contactHoursLabel: "Режим работы",
+        contactHours: "Ежедневно с 10:00 до 02:00",
+        footerCopy: "Все права защищены.",
+        modalSeatScreen: "ЭКРАН",
+        modalSeatLegendAvail: "Свободно",
+        modalSeatLegendSelected: "Выбрано",
+        modalSeatLegendOccupied: "Занято",
+        modalSeatSelectedLabel: "Выбранные места",
+        modalSeatBookBtn: "Подтвердить выбор",
+        ageLabel: "Возраст",
+        priceLabel: "Цена",
+        genreLabel: "Жанр",
+        today: "Сегодня",
+        tomorrow: "Завтра",
+        dayAfter: "Послезавтра",
+        timeSlotFormat: "2D лазер",
+        movieBookBtn: "Забронировать",
+        rowText: "Ряд",
+        seatText: "место"
+      },
+      uz: {
+        navHome: "Bosh sahifa",
+        navMovies: "Hozir kinoda",
+        navSchedule: "Jadval",
+        navAbout: "Biz haqimizda",
+        navPromos: "Aksiyalar",
+        navContacts: "Kontaktlar",
+        heroTitleStart: "PROWEB",
+        heroTitleEnd: "Cinema",
+        heroDesc: "Dolby Atmos innovatsion ovoz tizimi, kristaldek tiniq 4K lazer tasviri va poytaxtning qoq markazida tengsiz qulaylik.",
+        heroBuyBtn: "Chipta sotib olish",
+        heroMoreBtn: "Afishani ko'rish",
+        secMoviesTitle: "Hozir kinoda",
+        secMoviesSub: "Filmni tanlang va kinematografiya olamiga g'arq bo'ling",
+        secScheduleTitle: "Seanslar jadvali",
+        secScheduleSub: "Hordiq chiqarishingiz uchun qulay vaqt",
+        secAboutTitle: "Har bir kadrda innovatsiyalar",
+        secAboutText1: "PROWEB Cinema — Toshkentdagi yangi avlod zamonaviy kinoteatridir. Biz ilg'or proyeksiya va ovoz texnologiyalari yordamida tomoshabinlarimizga unutilmas kino tajribasini taqdim etamiz.",
+        secAboutText2: "Zallarimiz 4K Barco lazer proyektorlari, Dolby Atmos ovoz tizimi va kino ko'rish paytida maksimal qulaylik uchun premium ergonomik reklayner o'rindiqlari bilan jihozlangan.",
+        aboutFeat1Title: "Lazerli 4K",
+        aboutFeat1Desc: "Har qanday o'lchamdagi g'oyatda tiniq, to'yingan va yorqin tasvir",
+        aboutFeat2Title: "Dolby Atmos",
+        aboutFeat2Desc: "Sizni voqealar markaziga to'liq sho'ng'ituvchi uch o'lchamli hajmli ovoz",
+        aboutFeat3Title: "VIP Zallar",
+        aboutFeat3Desc: "Shaxsiy premium xizmat, ofitsiantni simsiz chaqirish va reklayner o'rindiqlar",
+        aboutFeat4Title: "Food Court",
+        aboutFeat4Desc: "Karamelli popkorn, nafis gazaklar va yangi ichimliklarning ulkan tanlovi",
+        secPromosTitle: "Aksiyalar va maxsus takliflar",
+        secPromosSub: "Mehmonlarimiz uchun maxsus chegirmalar va bonuslar",
+        promoDiscount: "Chegirma 30%",
+        promoGift: "Sovg'a",
+        promoSpec: "1 ta narxiga 2 ta",
+        promo1Title: "Talabalar Seshanbasi",
+        promo1Desc: "Har seshanba kuni talabalar kassada talabalik guvohnomasini taqdim etganda barcha seanslarga 30% chegirma oladilar.",
+        promo2Title: "Oilaviy Kombo",
+        promo2Desc: "Oilaviy sektor yoki VIP zallarga har qanday seans uchun 4 ta chipta sotib olganda — katta pishloqli popkorn va 2 ta salqin ichimlik sovg'a qilinadi!",
+        promo3Title: "Tungi Kinomarafon",
+        promo3Desc: "Har juma va shanba kunlari 23:00 dan keyin bitta chipta narxiga ketma-ket ikkita film tomosha qiling! Filmlarni kassalarda aniqlashtiring.",
+        secFormTitle: "Tezkor bron qilish",
+        secFormSub: "Formani to'ldiring, va biz bronni tasdiqlash uchun siz bilan bog'lanamiz",
+        formName: "Ismingiz",
+        formNamePl: "Ismingizni kiriting",
+        formPhone: "Telefon raqami",
+        formComment: "Buyurtmaga izoh",
+        formCommentPl: "Masalan: VIP zona yoki ma'lum bir qatorni xohlayman",
+        formSubmit: "Ariza yuborish",
+        formValidName: "Iltimos, ismingizni kiriting (kamida 2 ta belgi)",
+        formValidPhone: "Iltimos, to'g'ri telefon raqamini kiriting",
+        summaryEmptyText: "Elektron chiptani shakllantirish uchun seans va joylarni sxemada tanlang.",
+        summaryDateLabel: "Sana va vaqt",
+        summarySeatsLabel: "Tanlangan joylar",
+        summaryTotalLabel: "To'lov uchun jami",
+        summaryChangeBtn: "Joy tanlashni o'zgartirish",
+        bookingSuccessTitle: "Bron muvaffaqiyatli rasmiylashtirildi!",
+        bookingSuccessText: "Menejerimiz bronni tasdiqlash uchun 10 daqiqa ichida siz bilan bog'lanadi.",
+        bookingDate: "Sana va vaqt",
+        bookingSeats: "Joylar",
+        bookingCloseBtn: "Yopish",
+        secContactsTitle: "Kontaktlar",
+        secContactsSub: "Sizni kinoteatrimizda ko'rishdan doimo xursandmiz",
+        contactInfoTitle: "Bizni qanday topish mumkin",
+        contactAddressLabel: "Manzil",
+        contactAddress: "Toshkent sh., Shota Rustaveli ko'chasi, 53B",
+        contactPhoneLabel: "Ma'lumotlar telefoni",
+        contactPhone: "+998 (71) 123-45-67",
+        contactEmailLabel: "Email",
+        contactEmail: "info@prowebcinema.uz",
+        contactHoursLabel: "Ish tartibi",
+        contactHours: "Har kuni soat 10:00 dan 02:00 gacha",
+        footerCopy: "Barcha huquqlar himoyalangan.",
+        modalSeatScreen: "EKRAN",
+        modalSeatLegendAvail: "Bo'sh",
+        modalSeatLegendSelected: "Tanlangan",
+        modalSeatLegendOccupied: "Band",
+        modalSeatSelectedLabel: "Tanlangan joylar",
+        modalSeatBookBtn: "Tanlovni tasdiqlash",
+        ageLabel: "Yosh cheklovi",
+        priceLabel: "Narxi",
+        genreLabel: "Janr",
+        today: "Bugun",
+        tomorrow: "Ertaga",
+        dayAfter: "Indinga",
+        timeSlotFormat: "2D lazer",
+        movieBookBtn: "Bron qilish",
+        rowText: "Qator",
+        seatText: "joy",
+        bookingTicketNum: "Chipta raqami"
+      }
+    };
+
+    /* ==========================================================================
+       3. APPLICATION STATE
+       ========================================================================== */
+    const state = {
+      language: localStorage.getItem('proweb_lang') || 'ru',
+      selectedMovie: null,
+      selectedDate: 'today',
+      selectedTime: null,
+      selectedSeats: [],
+      occupiedSeats: {}
+    };
+
+    /* ==========================================================================
+       4. INITIALIZATION & ROUTING
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      // Setup dynamic dates
+      initDates();
+      
+      // Initialize translation
+      setLanguage(state.language);
+      
+      // Setup scrolling header
+      window.addEventListener('scroll', handleHeaderScroll);
+      
+      // Hamburger Menu Toggle
+      setupMobileMenu();
+      
+      // Setup active section indicator in header navigation
+      setupActiveLinkObserver();
+      
+      // Setup Language Selector event listeners
+      setupLanguageToggle();
+      
+      // Setup schedule date tab selectors
+      setupScheduleTabs();
+      
+      // Setup Phone Masking for +998 format
+      setupPhoneMask();
+      
+      // Setup Submit Handler
+      setupFormSubmit();
+      
+      // Setup Modal Keydown listener (Esc)
+      setupModalKeyboardClose();
+    });
+
+    // Generate dynamic dates (Today, Tomorrow, Day After)
+    let dynamicDatesObj = { ru: {}, uz: {} };
+    function initDates() {
+      const now = new Date();
+      const options = { day: 'numeric', month: 'long' };
+      
+      const today = new Date(now);
+      const tomorrow = new Date(now);
+      tomorrow.setDate(now.getDate() + 1);
+      const dayAfter = new Date(now);
+      dayAfter.setDate(now.getDate() + 2);
+      
+      dynamicDatesObj.ru = {
+        today: today.toLocaleDateString('ru-RU', options),
+        tomorrow: tomorrow.toLocaleDateString('ru-RU', options),
+        dayAfter: dayAfter.toLocaleDateString('ru-RU', options)
+      };
+      
+      const uzMonths = ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avgust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
+      const formatUzDate = (date) => `${date.getDate()}-${uzMonths[date.getMonth()]}`;
+      
+      dynamicDatesObj.uz = {
+        today: formatUzDate(today),
+        tomorrow: formatUzDate(tomorrow),
+        dayAfter: formatUzDate(dayAfter)
+      };
+      
+      // Update Tab text contents
+      updateTabButtons();
+    }
+
+    function updateTabButtons() {
+      const lang = state.language;
+      const todayLabel = lang === 'ru' ? 'Сегодня' : 'Bugun';
+      const tomorrowLabel = lang === 'ru' ? 'Завтра' : 'Ertaga';
+      const dayAfterLabel = lang === 'ru' ? 'Послезавтра' : 'Indinga';
+      
+      document.getElementById('tab-today').textContent = `${todayLabel} (${dynamicDatesObj[lang].today})`;
+      document.getElementById('tab-tomorrow').textContent = `${tomorrowLabel} (${dynamicDatesObj[lang].tomorrow})`;
+      document.getElementById('tab-dayAfter').textContent = `${dayAfterLabel} (${dynamicDatesObj[lang].dayAfter})`;
+    }
+
+    /* ==========================================================================
+       5. USER INTERFACE FUNCTIONS & RENDERERS
+       ========================================================================== */
+    function setLanguage(lang) {
+      state.language = lang;
+      localStorage.setItem('proweb_lang', lang);
+      document.documentElement.lang = lang;
+      
+      // Toggle language buttons active class
+      document.querySelectorAll('#lang-switcher .lang-btn').forEach(btn => {
+        if (btn.getAttribute('data-lang') === lang) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Translate all static nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+          el.innerHTML = i18n[lang][key];
+        }
+      });
+      
+      // Translate all input placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[lang][key]) {
+          el.setAttribute('placeholder', i18n[lang][key]);
+        }
+      });
+      
+      // Re-render dynamic elements
+      updateTabButtons();
+      renderMovies();
+      renderSchedule();
+      updateBookingSummary();
+    }
+
+    function renderMovies() {
+      const grid = document.getElementById('movies-grid');
+      grid.innerHTML = '';
+      const lang = state.language;
+      
+      movies.forEach(movie => {
+        const formattedPrice = movie.price.toLocaleString('uz-UZ') + " UZS";
+        const card = document.createElement('div');
+        card.className = 'movie-card';
+        card.innerHTML = `
+          <div class="movie-poster-container">
+            <div class="movie-badges">
+              <span class="badge-age">${movie.age}</span>
+              <span class="badge-duration">${movie.duration}</span>
+            </div>
+            <img src="${movie.poster}" alt="${movie.title[lang]}" class="movie-poster" loading="lazy">
+            <div class="movie-overlay">
+              <button class="btn btn-primary movie-overlay-btn" onclick="selectMovieForBooking(${movie.id})">${i18n[lang].movieBookBtn}</button>
+            </div>
+          </div>
+          <div class="movie-info">
+            <span class="movie-genre">${movie.genre[lang]}</span>
+            <h3 class="movie-title">${movie.title[lang]}</h3>
+            <p class="movie-desc">${movie.desc[lang]}</p>
+            <div class="movie-footer">
+              <div class="movie-price">
+                <span class="movie-price-label">${i18n[lang].priceLabel}</span>
+                <span class="movie-price-value">${formattedPrice}</span>
+              </div>
+              <button class="btn btn-secondary" onclick="selectMovieForBooking(${movie.id})" style="padding: 10px 20px; font-size: 0.85rem;">${i18n[lang].movieBookBtn}</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderSchedule() {
+      const container = document.getElementById('schedule-container');
+      container.innerHTML = '';
+      const lang = state.language;
+      
+      movies.forEach(movie => {
+        const row = document.createElement('div');
+        row.className = 'schedule-row';
+        
+        let timesHTML = '';
+        movie.showtimes.forEach(time => {
+          timesHTML += `
+            <button class="time-slot" onclick="selectSession(${movie.id}, '${state.selectedDate}', '${time}')">
+              <span>${time}</span>
+              <span class="time-slot-format">${i18n[lang].timeSlotFormat}</span>
+            </button>
+          `;
+        });
+        
+        row.innerHTML = `
+          <div class="schedule-movie-info">
+            <img src="${movie.poster}" alt="${movie.title[lang]}" class="schedule-movie-thumb" loading="lazy">
+            <div class="schedule-movie-details">
+              <h4>${movie.title[lang]}</h4>
+              <p>${movie.genre[lang]} &bull; ${movie.duration}</p>
+            </div>
+          </div>
+          <div class="schedule-times">
+            ${timesHTML}
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    /* ==========================================================================
+       6. INTERACTIVE BOOKING FLOW & DETERMINISTIC OCCUPANCY
+       ========================================================================== */
+    // Deterministic random generation of occupied seats per movie, date and time
+    function getOccupiedSeats(movieId, date, time) {
+      const key = `${movieId}-${date}-${time}`;
+      let hash = 0;
+      for (let i = 0; i < key.length; i++) {
+        hash = key.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      
+      const occupied = {};
+      const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
+      rows.forEach(row => {
+        const seatsInRow = row === 'F' ? 4 : 8; // VIP row has 4 seats, standard has 8
+        for (let num = 1; num <= seatsInRow; num++) {
+          const seatKey = `${row}${num}`;
+          // Deterministic percentage of occupied seats (approx. 35%)
+          const value = Math.abs(Math.sin(hash + row.charCodeAt(0) * num)) * 10;
+          if (value < 3.5) {
+            occupied[seatKey] = true;
+          }
+        }
+      });
+      return occupied;
+    }
+
+    function selectMovieForBooking(movieId) {
+      const movie = movies.find(m => m.id === movieId);
+      state.selectedMovie = movie;
+      state.selectedTime = movie.showtimes[2]; // Default to afternoon showtime (e.g. 3rd slot)
+      state.selectedSeats = [];
+      state.occupiedSeats = getOccupiedSeats(movie.id, state.selectedDate, state.selectedTime);
+      openSeatPickerModal();
+    }
+
+    function selectSession(movieId, date, time) {
+      const movie = movies.find(m => m.id === movieId);
+      state.selectedMovie = movie;
+      state.selectedDate = date;
+      state.selectedTime = time;
+      state.selectedSeats = [];
+      state.occupiedSeats = getOccupiedSeats(movie.id, date, time);
+      openSeatPickerModal();
+    }
+
+    function openHeroBooking() {
+      // Open booking with default movie (first in list)
+      selectMovieForBooking(movies[0].id);
+    }
+
+    function reopenSeatPicker() {
+      if (state.selectedMovie) {
+        openSeatPickerModal();
+      }
+    }
+
+    /* ==========================================================================
+       7. SEAT SELECTION PICKER MODAL
+       ========================================================================== */
+    function openSeatPickerModal() {
+      const lang = state.language;
+      const movie = state.selectedMovie;
+      
+      // Update modal titles
+      document.getElementById('seat-modal-movie-name').textContent = movie.title[lang];
+      
+      // Human-readable date string
+      const dateText = dynamicDatesObj[lang][state.selectedDate];
+      document.getElementById('seat-modal-time').textContent = `${dateText}, ${state.selectedTime}`;
+      
+      // Render Seat Grid
+      renderSeatGrid();
+      
+      // Reset Modal Stats
+      updateModalSelectionStats();
+      
+      openModal('seat-modal');
+    }
+
+    function renderSeatGrid() {
+      const container = document.getElementById('seat-grid-render');
+      container.innerHTML = '';
+      
+      const rows = ['A', 'B', 'C', 'D', 'E', 'F'];
+      rows.forEach(row => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'seat-row';
+        
+        // Left Label
+        const leftLabel = document.createElement('span');
+        leftLabel.className = 'row-label';
+        leftLabel.textContent = row;
+        rowDiv.appendChild(leftLabel);
+        
+        const seatCount = row === 'F' ? 4 : 8; // VIP row has 4 double-width seats
+        for (let num = 1; num <= seatCount; num++) {
+          const seatId = `${row}${num}`;
+          const seatBtn = document.createElement('button');
+          seatBtn.className = 'seat';
+          
+          if (row === 'F') {
+            seatBtn.classList.add('vip');
+          }
+          
+          // Check occupied state
+          if (state.occupiedSeats[seatId]) {
+            seatBtn.classList.add('occupied');
+            seatBtn.disabled = true;
+          }
+          
+          // Check if already selected in current selection session
+          if (state.selectedSeats.some(s => s.id === seatId)) {
+            seatBtn.classList.add('selected');
+          }
+          
+          seatBtn.addEventListener('click', () => toggleSeatSelection(row, num));
+          rowDiv.appendChild(seatBtn);
+        }
+        
+        // Right Label
+        const rightLabel = document.createElement('span');
+        rightLabel.className = 'row-label';
+        rightLabel.textContent = row;
+        rowDiv.appendChild(rightLabel);
+        
+        container.appendChild(rowDiv);
+      });
+    }
+
+    function toggleSeatSelection(row, num) {
+      const seatId = `${row}${num}`;
+      const seatIndex = state.selectedSeats.findIndex(s => s.id === seatId);
+      
+      if (seatIndex > -1) {
+        // Remove seat
+        state.selectedSeats.splice(seatIndex, 1);
+      } else {
+        // Add seat
+        const type = row === 'F' ? 'vip' : 'standard';
+        // VIP seat incurs a 50% price multiplier
+        const price = type === 'vip' ? state.selectedMovie.price * 1.5 : state.selectedMovie.price;
+        state.selectedSeats.push({ id: seatId, row, num, type, price });
+      }
+      
+      // Update UI in grid and stats
+      renderSeatGrid();
+      updateModalSelectionStats();
+    }
+
+    function updateModalSelectionStats() {
+      const count = state.selectedSeats.length;
+      const confirmBtn = document.getElementById('confirm-seats-btn');
+      
+      if (count > 0) {
+        confirmBtn.removeAttribute('disabled');
+        
+        // List selected seats
+        const seatNames = state.selectedSeats.map(s => {
+          const vipTag = s.type === 'vip' ? ' (VIP)' : '';
+          return `${s.row}${s.num}${vipTag}`;
+        }).join(', ');
+        document.getElementById('modal-selected-seats-list').textContent = seatNames;
+        
+        // Total price calculation
+        const total = state.selectedSeats.reduce((sum, s) => sum + s.price, 0);
+        document.getElementById('modal-total-price-val').textContent = total.toLocaleString('uz-UZ') + " UZS";
+      } else {
+        confirmBtn.setAttribute('disabled', 'true');
+        document.getElementById('modal-selected-seats-list').textContent = '—';
+        document.getElementById('modal-total-price-val').textContent = "0 UZS";
+      }
+    }
+
+    function confirmSeatSelection() {
+      closeModal('seat-modal');
+      updateBookingSummary();
+      
+      // Smooth scroll to form section
+      document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateBookingSummary() {
+      const lang = state.language;
+      const emptyCard = document.getElementById('summary-empty');
+      const contentCard = document.getElementById('summary-content');
+      
+      if (state.selectedSeats.length === 0 || !state.selectedMovie) {
+        emptyCard.style.display = 'block';
+        contentCard.style.display = 'none';
+        return;
+      }
+      
+      emptyCard.style.display = 'none';
+      contentCard.style.display = 'block';
+      
+      // Populate details
+      document.getElementById('summary-poster').src = state.selectedMovie.poster;
+      document.getElementById('summary-poster').alt = state.selectedMovie.title[lang];
+      document.getElementById('summary-title').textContent = state.selectedMovie.title[lang];
+      document.getElementById('summary-genre').textContent = state.selectedMovie.genre[lang];
+      
+      const dateText = dynamicDatesObj[lang][state.selectedDate];
+      document.getElementById('summary-datetime').textContent = `${dateText}, ${state.selectedTime}`;
+      
+      // Seats display
+      const seatNames = state.selectedSeats.map(s => {
+        const vipTag = s.type === 'vip' ? ' (VIP)' : '';
+        return `${i18n[lang].rowText} ${s.row}, ${i18n[lang].seatText} ${s.num}${vipTag}`;
+      }).join('; ');
+      document.getElementById('summary-seats').textContent = seatNames;
+      
+      // Total price
+      const total = state.selectedSeats.reduce((sum, s) => sum + s.price, 0);
+      document.getElementById('summary-total-price').textContent = total.toLocaleString('uz-UZ') + " UZS";
+    }
+
+    /* ==========================================================================
+       8. CLIENT-SIDE VALIDATION & CUSTOM PHONE MASK
+       ========================================================================== */
+    function setupPhoneMask() {
+      const phoneInput = document.getElementById('form-phone');
+      
+      phoneInput.addEventListener('focus', () => {
+        if (!phoneInput.value) {
+          phoneInput.value = '+998 (';
+        }
+      });
+      
+      phoneInput.addEventListener('keydown', (e) => {
+        // Prevent deleting prefix +998 (
+        if (e.key === 'Backspace' && phoneInput.value.length <= 6) {
+          e.preventDefault();
+        }
+      });
+      
+      phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        
+        // Strip non-digits except +
+        let digits = value.replace(/[^\d]/g, '');
+        
+        // Ensure starting with 998
+        if (!digits.startsWith('998')) {
+          digits = '998' + digits;
+        }
+        
+        // Clamp length to 12 digits (998 + 9 phone digits)
+        digits = digits.substring(0, 12);
+        
+        // Format layout: +998 (XX) XXX-XX-XX
+        let formatted = '+998';
+        if (digits.length > 3) {
+          formatted += ' (' + digits.substring(3, 5);
+        }
+        if (digits.length > 5) {
+          formatted += ') ' + digits.substring(5, 8);
+        }
+        if (digits.length > 8) {
+          formatted += '-' + digits.substring(8, 10);
+        }
+        if (digits.length > 10) {
+          formatted += '-' + digits.substring(10, 12);
+        }
+        
+        phoneInput.value = formatted;
+      });
+    }
+
+    function validateForm() {
+      const nameInput = document.getElementById('form-name');
+      const phoneInput = document.getElementById('form-phone');
+      let isValid = true;
+      
+      // Name check
+      const groupName = document.getElementById('group-name');
+      if (nameInput.value.trim().length < 2) {
+        groupName.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        groupName.classList.remove('is-invalid');
+      }
+      
+      // Phone Check: Matches "+998 (XX) XXX-XX-XX"
+      const groupPhone = document.getElementById('group-phone');
+      const phoneRegex = /^\+998\s\(\d{2}\)\s\d{3}-\d{2}-\d{2}$/;
+      if (!phoneRegex.test(phoneInput.value)) {
+        groupPhone.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        groupPhone.classList.remove('is-invalid');
+      }
+      
+      // If validation fails, apply temporary shake animation to form container
+      if (!isValid) {
+        const formContainer = document.getElementById('booking-form-wrapper');
+        formContainer.classList.add('shake');
+        setTimeout(() => {
+          formContainer.classList.remove('shake');
+        }, 400);
+      }
+      
+      return isValid;
+    }
+
+    function setupFormSubmit() {
+      const form = document.getElementById('booking-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const isFormValid = validateForm();
+        if (!isFormValid) return;
+        
+        // Require seats selection
+        if (state.selectedSeats.length === 0) {
+          // Highlight summary card with animation to show user they must pick seats
+          const summaryCard = document.getElementById('summary-card');
+          summaryCard.classList.add('shake');
+          setTimeout(() => {
+            summaryCard.classList.remove('shake');
+          }, 400);
+          
+          // Re-open seat picker modal automatically for convenience
+          if (state.selectedMovie) {
+            openSeatPickerModal();
+          } else {
+            // If they haven't selected a movie yet, open with default movie
+            selectMovieForBooking(movies[0].id);
+          }
+          return;
+        }
+        
+        // SUCCESS: Form and Seats are valid!
+        generateDigitalTicket();
+      });
+    }
+
+    function generateDigitalTicket() {
+      const lang = state.language;
+      const name = document.getElementById('form-name').value;
+      const total = state.selectedSeats.reduce((sum, s) => sum + s.price, 0);
+      const ticketNum = "PW-" + Math.floor(1000 + Math.random() * 9000) + "-UZ";
+      const barcodeVal = Math.floor(100000000000 + Math.random() * 900000000000);
+      
+      // Update ticket labels in success modal
+      document.getElementById('ticket-id-val').textContent = ticketNum;
+      document.getElementById('ticket-movie-name').textContent = state.selectedMovie.title[lang];
+      
+      const dateText = dynamicDatesObj[lang][state.selectedDate];
+      document.getElementById('ticket-datetime').textContent = `${dateText}, ${state.selectedTime}`;
+      
+      const seatNames = state.selectedSeats.map(s => {
+        const vipTag = s.type === 'vip' ? ' (VIP)' : '';
+        return `${s.row}${s.num}${vipTag}`;
+      }).join(', ');
+      document.getElementById('ticket-seats').textContent = `${i18n[lang].rowText} ${state.selectedSeats[0].row}: ${seatNames}`;
+      document.getElementById('ticket-visitor-name').textContent = name;
+      document.getElementById('ticket-total-price').textContent = total.toLocaleString('uz-UZ') + " UZS";
+      document.getElementById('ticket-barcode-val').textContent = barcodeVal;
+      
+      // Open success ticket modal
+      openModal('ticket-modal');
+      
+      // Reset state & form
+      document.getElementById('booking-form').reset();
+      state.selectedSeats = [];
+      updateBookingSummary();
+    }
+
+    /* ==========================================================================
+       9. MODAL CONTROL UTILITIES
+       ========================================================================== */
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('active');
+      document.body.style.overflow = ''; // Unlock background scroll
+    }
+
+    function setupModalKeyboardClose() {
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal('seat-modal');
+          closeModal('ticket-modal');
+        }
+      });
+      
+      // Click outside modal content closes it
+      document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            closeModal(overlay.id);
+          }
+        });
+      });
+    }
+
+    /* ==========================================================================
+       10. COMMON UI MECHANICS (BURGER, LANGUAGE, TABS, MAP)
+       ========================================================================== */
+    function setupMobileMenu() {
+      const burger = document.getElementById('burger-menu');
+      const menu = document.getElementById('nav-menu');
+      const links = document.querySelectorAll('.nav-link');
+      
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('active');
+        menu.classList.toggle('active');
+      });
+      
+      // Close menu when clicking link
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          burger.classList.remove('active');
+          menu.classList.remove('active');
+        });
+      });
+    }
+
+    function handleHeaderScroll() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+    }
+
+    function setupActiveLinkObserver() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (window.scrollY >= (sectionTop - 120)) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    }
+
+    // Map Popup Box Controller
+    const mapDescriptions = {
+      ru: {
+        'cinema': { title: 'PROWEB Cinema', desc: 'ул. Шота Руставели, 53Б. Основной современный кинокомплекс.' },
+        'metro-station-1': { title: 'Метро Космонавтлар', desc: 'Узбекистанская линия. 6 минут ходьбы пешком до кинотеатра.' },
+        'metro-station-2': { title: 'Метро Ойбек', desc: 'Юнусабадская линия. 9 минут пешком до главного входа.' },
+        'tv-tower': { title: 'Ташкентская телебашня', desc: 'Достопримечательность столицы. Высота 375 метров.' },
+        'square': { title: 'Сквер Амира Темура', desc: 'Исторический центр города. 10 минут на транспорте.' }
+      },
+      uz: {
+        'cinema': { title: 'PROWEB Cinema', desc: 'Shota Rustaveli ko\'chasi, 53B. Asosiy zamonaviy kinokompleks.' },
+        'metro-station-1': { title: 'Kosmonavtlar metrosi', desc: 'O\'zbekiston yo\'li. Kinoteatrgacha 6 daqiqalik piyoda yo\'l.' },
+        'metro-station-2': { title: 'Oybek metrosi', desc: 'Yunusobod yo\'li. Bosh kirishgacha 9 daqiqalik piyoda yo\'l.' },
+        'tv-tower': { title: 'Toshkent teleminorasi', desc: 'Poytaxtning diqqatga zobor joyi. Balandligi 375 metr.' },
+        'square': { title: 'Amir Temur xiyoboni', desc: 'Shaharning tarixiy markazi. Transportda 10 daqiqa.' }
+      }
+    };
+
+    function showMapPopup(landmarkId) {
+      const lang = state.language;
+      const info = mapDescriptions[lang][landmarkId];
+      const popup = document.getElementById('map-info-popup');
+      
+      if (!info) return;
+      
+      document.getElementById('map-popup-title').textContent = info.title;
+      document.getElementById('map-popup-desc').textContent = info.desc;
+      
+      popup.classList.add('active');
+      
+      // Auto close map popup details after 5 seconds
+      setTimeout(() => {
+        popup.classList.remove('active');
+      }, 5000);
+    }
+
+    function setupLanguageToggle() {
+      const switcher = document.getElementById('lang-switcher');
+      switcher.addEventListener('click', (e) => {
+        const target = e.target.closest('.lang-btn');
+        if (target && !target.classList.contains('active')) {
+          const newLang = target.getAttribute('data-lang');
+          setLanguage(newLang);
+        }
+      });
+    }
+
+    function setupScheduleTabs() {
+      const tabs = document.querySelectorAll('#schedule-tabs .tab-btn');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          state.selectedDate = tab.getAttribute('data-date');
+          renderSchedule();
+        });
+      });
+    }
+  </script>
+</body>
+</html>
